@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            cc: gcc
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v3
+    - name: Cache test cases
+      uses: actions/cache@v3
+      with:
+        key: cases
+        path: builddir/cases.zip
+    - name: Install dependencies (Linux)
+      if: startsWith(matrix.os, 'ubuntu')
+      run: sudo apt-get install meson
+    - name: Build
+      run: |
+        CC=${{ matrix.cc }} meson setup builddir
+        meson compile -C builddir
+    - name: Test
+      run: meson test -C builddir
