@@ -29,8 +29,6 @@
 ##
 build: all
 
-CC=cc
-
 JXR_VERSION=1.1
 
 DIR_SRC=$(CURDIR)
@@ -120,7 +118,7 @@ $(DIR_BUILD)/$(DIR_ENC)/%.o: $(DIR_SRC)/$(DIR_ENC)/%.c
 
 $(DIR_BUILD)/libjpegxr.a: $(OBJ_ENC) $(OBJ_DEC) $(OBJ_SYS)
 	$(MK_DIR) $(@D)
-	ar rvu $@ $(OBJ_ENC) $(OBJ_DEC) $(OBJ_SYS)
+	$(AR) rvu $@ $(OBJ_ENC) $(OBJ_DEC) $(OBJ_SYS)
 	ranlib $@
 
 $(DIR_BUILD)/libjpegxr.so: $(OBJ_ENC) $(OBJ_DEC) $(OBJ_SYS)
@@ -158,7 +156,7 @@ $(DIR_BUILD)/$(DIR_TEST)/%.o: $(DIR_SRC)/$(DIR_TEST)/%.c
 
 $(DIR_BUILD)/libjxrglue.a: $(OBJ_GLUE) $(OBJ_TEST)
 	$(MK_DIR) $(@D)
-	ar rvu $@ $(OBJ_GLUE) $(OBJ_TEST)
+	$(AR) rvu $@ $(OBJ_GLUE) $(OBJ_TEST)
 	ranlib $@
 
 $(DIR_BUILD)/libjxrglue.so: $(OBJ_GLUE) $(OBJ_TEST)
