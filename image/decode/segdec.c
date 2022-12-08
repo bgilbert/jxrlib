@@ -961,7 +961,7 @@ Int DecodeMacroblockLowpass (CWMImageStrCodec * pSC, CCodingContext *pContext,
                         pCoeffs[k] += getBits (pIO, iModelBits);
                     }
                     else if (pCoeffs[k] < 0) {
-                        pCoeffs[k] <<= iModelBits;
+                        pCoeffs[k] = (int) (((unsigned) pCoeffs[k]) << iModelBits);
                         pCoeffs[k] -= getBits (pIO, iModelBits);
                     }
 #endif // WIN32
