@@ -439,9 +439,6 @@ Cleanup:
 // main function
 //================================================================
 int 
-#ifndef __ANSI__
-__cdecl
-#endif // __ANSI__
 main(int argc, char* argv[])
 {
     ERR err = WMP_errSuccess;

@@ -575,9 +575,6 @@ int DPK_QPS_32f[11][6] = {
 // main function
 //================================================================
 int 
-#ifndef __ANSI__
-__cdecl 
-#endif // __ANSI__
 main(int argc, char* argv[])
 {
     ERR err = WMP_errSuccess;

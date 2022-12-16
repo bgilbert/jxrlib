@@ -87,9 +87,6 @@ void init_encoder_params(CWMIStrCodecParam* params, int quality_i)
 // main function
 //================================================================
 int 
-#ifndef __ANSI__
-__cdecl 
-#endif // __ANSI__
 main(int argc, char* argv[])
 {
     if (argc != 5) {

@@ -292,7 +292,6 @@ ERR GetImageDecodeIID(const char* szExt, const PKIID** ppIID);
 
 
 //================================================================
-#ifdef __ANSI__
 struct tagPKFactory;
 struct tagPKCodecFactory;
 struct tagPKImageDecode;
@@ -303,13 +302,6 @@ struct tagPKFormatConverter;
 #define PKImageDecode       struct tagPKImageDecode
 #define PKImageEncode       struct tagPKImageEncode
 #define PKFormatConverter   struct tagPKFormatConverter
-#else // __ANSI__
-typedef struct tagPKFactory PKFactory;
-typedef struct tagPKCodecFactory PKCodecFactory;
-typedef struct tagPKImageDecode PKImageDecode;
-typedef struct tagPKImageEncode PKImageEncode;
-typedef struct tagPKFormatConverter PKFormatConverter;
-#endif // __ANSI__
 //================================================================
 typedef struct tagPKStream
 {
@@ -330,9 +322,7 @@ typedef struct tagPKFactory
     ERR (*CreateStreamFromMemory)(struct WMPStream**, void*, size_t);
 
     ERR (*Release)(PKFactory**);
-#ifdef __ANSI__
 #undef PKFactory
-#endif // __ANSI__
 } PKFactory;
 
 //----------------------------------------------------------------
@@ -350,9 +340,7 @@ typedef struct tagPKCodecFactory
     ERR (*CreateFormatConverter)(PKFormatConverter**);
 
     ERR (*Release)(PKCodecFactory**);
-#ifdef __ANSI__
 #undef PKCodecFactory
-#endif // __ANSI__
 } PKCodecFactory;
 
 //----------------------------------------------------------------
@@ -457,9 +445,7 @@ typedef struct tagPKImageEncode
         struct WMPStream   *pPATempFile;
     } WMP;
 
-#ifdef __ANSI__
 #undef PKImageEncode
-#endif // __ANSI__
 } PKImageEncode;
 
 //----------------------------------------------------------------
@@ -552,9 +538,7 @@ typedef struct tagPKImageDecode
         DESCRIPTIVEMETADATA sDescMetadata;
     } WMP;
 
-#ifdef __ANSI__
 #undef PKImageDecode
-#endif // __ANSI__
 } PKImageDecode;
 
 //----------------------------------------------------------------
@@ -599,9 +583,7 @@ typedef struct tagPKFormatConverter
 
     PKImageDecode* pDecoder;
     PKPixelFormatGUID enPixelFormat;
-#ifdef __ANSI__
 #undef PKFormatConverter
-#endif // __ANSI__
 } PKFormatConverter;
 
 //----------------------------------------------------------------

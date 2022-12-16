@@ -17,7 +17,6 @@ m_dep = cc.find_library('m', required : false)
 
 # compiler options
 add_project_arguments(
-  '-D__ANSI__',
   '-DDISABLE_PERF_MEASUREMENT',
   language: 'c',
 )

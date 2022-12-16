@@ -46,11 +46,7 @@ ERR GetTestEncodeIID(const char* szExt, const PKIID** ppIID);
 ERR GetTestDecodeIID(const char* szExt, const PKIID** ppIID);
 
 //================================================================
-#ifdef __ANSI__
 #define PKTestDecode struct tagPKTestDecode
-#else // __ANSI__
-typedef struct tagPKTestDecode PKTestDecode;
-#endif // __ANSI__
 //================================================================
 
 //----------------------------------------------------------------
@@ -138,9 +134,7 @@ typedef struct tagPKTestDecode
             Bool fLittleEndian;
         } TIF;
     } EXT;
-#ifdef __ANSI__
 #undef PKTestDecode
-#endif // __ANSI__
 } PKTestDecode;
 
 //----------------------------------------------------------------
