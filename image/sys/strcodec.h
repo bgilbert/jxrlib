@@ -28,6 +28,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdint.h>
 
 #include "windowsmediaphoto.h"
 #include "common.h"
@@ -38,33 +39,27 @@
 #endif
 
 //================================================================
-//#ifdef WIN32
-#if defined(_MSC_VER) && !defined(UNDER_CE)   // WIN32 seems to be defined always in VS2005 for ARM platform
-#define PLATFORM_X86
-#include "../x86/x86.h"
-#endif
 
+//================================
+// bitio functions
+//================================
 #ifndef UNREFERENCED_PARAMETER
 #define UNREFERENCED_PARAMETER(P) { (P) = (P); }
 #endif // UNREFERENCED_PARAMETER
 
-#ifdef UNDER_CE
-#define PLATFORM_WCE
-#include "arm.h"
-#endif
+#define PACKETLENGTH (1U<<12)   // 4kB
 
-#ifdef __ANSI__
-#define PLATFORM_ANSI
-#include "ansi.h"
-#endif
+#define readIS_L1(pSC, pIO) readIS(pSC, pIO)
+#define readIS_L2(pSC, pIO) (void)(pSC, pIO)
+
+#define writeIS_L1(pSC, pIO) writeIS(pSC, pIO)
+#define writeIS_L2(pSC, pIO) (void)(pSC, pIO)
+
+#define UINTPTR_T uintptr_t
+#define INTPTR_T intptr_t
+typedef uint64_t U64;
 
 //================================================================
-
-#ifdef PLATFORM_ANSI
-typedef unsigned long long U64;
-#else // PLATFORM_ANSI
-typedef unsigned __int64 U64;
-#endif // PLATFORM_ANSI
 
 #if (defined(WIN32) && !defined(UNDER_CE)) || (defined(UNDER_CE) && defined(_ARM_))
 // WinCE ARM and Desktop x86
