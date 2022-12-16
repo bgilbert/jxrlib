@@ -105,7 +105,7 @@ import('pkgconfig').generate(
   url : 'https://github.com/bgilbert/jxrlib',
 )
 
-executable(
+enc = executable(
   'JxrEncApp',
   'jxrencoderdecoder/JxrEncApp.c',
   include_directories : jxrglue_include,
@@ -113,7 +113,7 @@ executable(
   link_with : [jxrglue],
 )
 
-executable(
+dec = executable(
   'JxrDecApp',
   'jxrencoderdecoder/JxrDecApp.c',
   include_directories : jxrglue_include,
@@ -123,4 +123,12 @@ executable(
 
 jxrlib_dep = declare_dependency(
   link_with : [jxrglue],
+)
+
+test(
+  'decode',
+  files('test/decode.py'),
+  args : [dec],
+  # avoid timeout during download
+  timeout : 1800,
 )
