@@ -674,11 +674,11 @@ U32 load4BE(void* pv)
     U32  v;
     v = ((U16 *) pv)[0];
     v |= ((U32)((U16 *) pv)[1]) << 16;
-    return _byteswap_ulong(v);
+    return _byte_swap_u32(v);
 #else // _M_IA64
     U32 v;
     memcpy(&v, pv, sizeof(U32));
-    return _byteswap_ulong(v);
+    return _byte_swap_u32(v);
 #endif // _M_IA64
 #endif // _BIG__ENDIAN_
 }
@@ -688,7 +688,7 @@ U32 load4BE(void* pv)
 #ifdef _BIG__ENDIAN_
 #define WRITESWAP_ENDIAN(a) ((a)>>16)
 #else // _BIG__ENDIAN_
-#define WRITESWAP_ENDIAN(a)	_byteswap_ulong(a)
+#define WRITESWAP_ENDIAN(a)	_byte_swap_u32(a)
 #endif // _BIG__ENDIAN_
 
 //================================================================

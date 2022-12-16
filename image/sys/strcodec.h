@@ -48,25 +48,18 @@ typedef uint64_t U64;
 
 //================================================================
 
-#if (defined(WIN32) && !defined(UNDER_CE)) || (defined(UNDER_CE) && defined(_ARM_))
-// WinCE ARM and Desktop x86
-#else
-// other platform
 #ifdef _BIG__ENDIAN_
-#define _byteswap_ulong(x)  (x)
-#else // _BIG__ENDIAN_
-#if _MSC_VER < 1924
-static inline U32 _byteswap_ulong(U32 bits)
+#define _byte_swap_u32(x)  (x)
+#else
+static inline uint32_t _byte_swap_u32(uint32_t bits)
 {
-    U32 r = (bits & 0xffu) << 24;
+    uint32_t r = (bits & 0xffu) << 24;
     r |= (bits << 8) & 0xff0000u;
     r |= ((bits >> 8) & 0xff00u);
     r |= ((bits >> 24) & 0xffu);
 
     return r;
 }
-#endif // _MSC_VER
-#endif // _BIG__ENDIAN_
 #endif
 
 //================================================================

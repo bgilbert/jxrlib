@@ -53,11 +53,11 @@ static U32 _load4(void* pv)
     U32  v;
     v = ((U16 *) pv)[0];
     v |= ((U32)((U16 *) pv)[1]) << 16;
-    return _byteswap_ulong(v);
+    return _byte_swap_u32(v);
 #else // _M_IA64
     U32 v;
     memcpy(&v, pv, sizeof(U32));
-    return _byteswap_ulong(v);
+    return _byte_swap_u32(v);
 #endif // _M_IA64
 #endif // _BIG__ENDIAN_
 }
