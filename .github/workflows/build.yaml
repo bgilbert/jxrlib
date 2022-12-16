@@ -19,6 +19,8 @@ jobs:
         include:
           - os: ubuntu-latest
             cc: gcc
+          - os: macos-latest
+            cc: clang
     steps:
     - name: Check out repo
       uses: actions/checkout@v3
@@ -30,6 +32,9 @@ jobs:
     - name: Install dependencies (Linux)
       if: startsWith(matrix.os, 'ubuntu')
       run: sudo apt-get install meson
+    - name: Install dependencies (macOS)
+      if: startsWith(matrix.os, 'macos')
+      run: brew install meson
     - name: Build
       run: |
         CC=${{ matrix.cc }} meson setup builddir
