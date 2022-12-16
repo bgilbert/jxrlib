@@ -83,6 +83,27 @@ typedef unsigned long long U64;
 typedef unsigned __int64 U64;
 #endif // PLATFORM_ANSI
 
+#if (defined(WIN32) && !defined(UNDER_CE)) || (defined(UNDER_CE) && defined(_ARM_))
+// WinCE ARM and Desktop x86
+#else
+// other platform
+#ifdef _BIG__ENDIAN_
+#define _byteswap_ulong(x)  (x)
+#else // _BIG__ENDIAN_
+#if _MSC_VER < 1924
+static inline U32 _byteswap_ulong(U32 bits)
+{
+    U32 r = (bits & 0xffu) << 24;
+    r |= (bits << 8) & 0xff0000u;
+    r |= ((bits >> 8) & 0xff00u);
+    r |= ((bits >> 24) & 0xffu);
+
+    return r;
+}
+#endif // _MSC_VER
+#endif // _BIG__ENDIAN_
+#endif
+
 //================================================================
 #define MARKERCOUNT (PACKETLENGTH * 2)
 
