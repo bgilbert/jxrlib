@@ -1085,10 +1085,10 @@ ERR PKImageEncode_SetXMPMetadata_WMP(PKImageEncode *pIE, const U8 *pbXMPMetadata
         // hd and tiff don't put a trailing null, so we don't either
         cbTemp = cbXMPMetadata - (U32) ( pszFormatEnd - pszFormatBegin ) + sizeof(szHDPhotoFormat) - 1;
         assert(cbTemp <= cbBuffer);
-        FailIf(0 != STRCPY_SAFE(pszFormatBegin,
-            cbBuffer - (pszFormatBegin - pbTemp),
-            szHDPhotoFormat),
+        FailIf(sizeof(szHDPhotoFormat) < cbBuffer - (pszFormatBegin - pbTemp),
             WMP_errBufferOverflow);
+        strncpy(pszFormatBegin, szHDPhotoFormat,
+            cbBuffer - (pszFormatBegin - pbTemp));
         memcpy(pszFormatBegin + sizeof(szHDPhotoFormat) - 1, pbXMPMetadata + ( pszFormatEnd - pbTemp ),
             cbXMPMetadata - ( pszFormatEnd - pbTemp ));
     }
