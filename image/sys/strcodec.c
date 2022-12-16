@@ -1008,7 +1008,7 @@ Void fillToByte(BitIOInfo* pIO)
 U32 getBit16_S(CWMImageStrCodec* pSC, BitIOInfo* pIO, U32 cBits)
 {
     U32 rc = getBit16(pIO, cBits);
-    readIS_L1(pSC, pIO);
+    readIS(pSC, pIO);
 
     return rc;
 }
@@ -1016,7 +1016,7 @@ U32 getBit16_S(CWMImageStrCodec* pSC, BitIOInfo* pIO, U32 cBits)
 U32 putBit16_S(CWMImageStrCodec* pSC, BitIOInfo* pIO, U32 uiBits, U32 cBits)
 {
     putBit16(pIO, uiBits, cBits);
-    writeIS_L1(pSC, pIO);
+    writeIS(pSC, pIO);
 
     return 0;
 }
@@ -1113,7 +1113,7 @@ ERR detachISRead(CWMImageStrCodec* pSC, BitIOInfo* pIO)
     // we can ONLY detach IStream at byte boundary
     flushToByte(pIO);
     assert(0 == (pIO->cBitsUsed % 8));
-    Call(readIS_L1(pSC, pIO));
+    Call(readIS(pSC, pIO));
 
     // set stream to right offset, undo buffering
     cbRemain = (pIO->pbStart + PACKETLENGTH * 2) - (pIO->pbCurrent + pIO->cBitsUsed / 8);
@@ -1170,7 +1170,7 @@ ERR detachISWrite(CWMImageStrCodec* pSC, BitIOInfo* pIO)
 
     // we can ONLY detach IStream at byte boundary
     assert(0 == (pIO->cBitsUsed % 8));
-    Call(writeIS_L1(pSC, pIO));
+    Call(writeIS(pSC, pIO));
 
     PERFTIMER_STOP(pSC->m_fMeasurePerf, pSC->m_ptEncDecPerf);
     err = pIO->pWS->Write(pIO->pWS, pIO->pbStart, pIO->pbCurrent + pIO->cBitsUsed / 8 - pIO->pbStart);

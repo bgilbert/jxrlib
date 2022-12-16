@@ -185,7 +185,7 @@ static Void DecodeCBP(CWMImageStrCodec * pSC, CCodingContext *pContext)
     CAdaptiveHuffman *pAHCBP1 = pContext->m_pAdaptHuffCBPCY1;
     CAdaptiveHuffman *pAHex1 = pContext->m_pAHexpt[1];
         
-    readIS_L1(pSC, pIO);
+    readIS(pSC, pIO);
 
     for (i = 0; i < iChannel; i++) {
 
@@ -660,14 +660,9 @@ static Int DecodeCoeffs (CWMImageStrCodec * pSC, CCodingContext *pContext,
         Int iIndex = 0, iNumNonZero;
 
         if(pSC->WMISCP.sbSubband != SB_NO_FLEXBITS)
-            readIS_L1(pSC, pIOFL);
+            readIS(pSC, pIOFL);
 
         for (iBlock = 0; iBlock < iNBlocks; iBlock++) {
-
-            readIS_L2(pSC, pIO);
-            if (pIO != pIOFL)
-                readIS_L2(pSC, pIOFL);
-
             iQP = (pSC->m_param.bTranscode ? 1 : pTile->pQuantizerHP[iPlanes > 1 ? i : (iBlock > 3 ? (cf == YUV_420 ? iBlock - 3 : iBlock / 2 - 1) : 0)][pSC->MBInfo.iQIndexHP].iQP);
 
             for (iSubblock = 0; iSubblock < 4; iSubblock++, iIndex++, iCBPCY >>= 1) {
@@ -780,7 +775,7 @@ Int DecodeMacroblockLowpass (CWMImageStrCodec * pSC, CCodingContext *pContext,
     UNREFERENCED_PARAMETER( iMBX );
     UNREFERENCED_PARAMETER( iMBYdummy );
 
-    readIS_L1(pSC, pIO);
+    readIS(pSC, pIO);
     if((pSC->WMISCP.bfBitstreamFormat != SPATIAL) && (pSC->pTile[pSC->cTileColumn].cBitsLP > 0))  // MB-based LP QP index
         pMBInfo->iQIndexLP = decodeQPIndex(pIO, pSC->pTile[pSC->cTileColumn].cBitsLP);
     
@@ -1009,7 +1004,7 @@ Int DecodeMacroblockDC(CWMImageStrCodec * pSC, CCodingContext *pContext, Int iMB
     for (i = 0; i < iChannels; i++)
         memset (pMBInfo->iBlockDC[i], 0, 16 * sizeof (I32));
 
-    readIS_L1(pSC, pIO);
+    readIS(pSC, pIO);
 
     pMBInfo->iQIndexLP = pMBInfo->iQIndexHP = 0;
 

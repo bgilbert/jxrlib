@@ -2453,7 +2453,7 @@ static size_t GetVLWordEsc(BitIOInfo* pIO, Int *iEscape)
 Int readIndexTable(CWMImageStrCodec * pSC)
 {
     BitIOInfo* pIO = pSC->pIOHeader;
-    readIS_L1(pSC, pIO);
+    readIS(pSC, pIO);
 
     if(pSC->cNumBitIO > 0){
         size_t *pTable = pSC->pIndexTable;
@@ -2465,7 +2465,7 @@ Int readIndexTable(CWMImageStrCodec * pSC)
 
         //iBits = getBit16(pIO, 5) + 1; // how many bits per entry
         for(i = 0; i < iEntry; i ++){
-            readIS_L1(pSC, pIO);
+            readIS(pSC, pIO);
             pTable[i] = GetVLWordEsc(pIO, NULL);  // escape handling is not important since the respective band is not accessed
         }
     }

@@ -571,13 +571,13 @@ Int writeIndexTable(CWMImageStrCodec * pSC)
         for(i = 0; i < iEntry; ){
         for(l = 0; l < (pSC->WMISCP.bfBitstreamFormat == FREQUENCY && pSC->WMISCP.bProgressiveMode ? pSC->cSB : 1); l ++, i ++)
         {
-            writeIS_L1(pSC, pIO);
+            writeIS(pSC, pIO);
             PutVLWordEsc(pIO, (pTable[i] <= MINIMUM_PACKET_LENGTH) ? 0xff : 0, iSize[l]);
             iSize[l] += (pTable[i] <= MINIMUM_PACKET_LENGTH) ? 0 : pTable[i];
         }
         }
 
-        writeIS_L1(pSC, pIO);
+        writeIS(pSC, pIO);
         PutVLWordEsc(pIO, 0xff, 0); // escape to end
         fillToByte(pIO);
     }

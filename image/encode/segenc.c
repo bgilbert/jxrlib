@@ -120,7 +120,7 @@ Int EncodeMacroblockDC (CWMImageStrCodec *pSC, CCodingContext *pContext, Int iMB
     UNREFERENCED_PARAMETER( iMBX );
     UNREFERENCED_PARAMETER( iMBY );
 
-    writeIS_L1(pSC, pIO);
+    writeIS(pSC, pIO);
 
     if(pSC->m_param.bTranscode == FALSE){
         pMBInfo->iQIndexLP = (U8)(pTile->cNumQPLP > 1 ? (rand() % pTile->cNumQPLP) : 0);
@@ -625,7 +625,7 @@ Int EncodeMacroblockLowpass (CWMImageStrCodec *pSC, CCodingContext *pContext, In
         iModelBits = pContext->m_aModelLP.m_iFlcBits[1];
     }
 
-    writeIS_L1(pSC, pIO);
+    writeIS(pSC, pIO);
 
     UpdateModelMB (cf, iChannels, aLaplacianMean, &pContext->m_aModelLP);
 
@@ -837,7 +837,7 @@ static Int CodeCoeffs (CWMImageStrCodec * pSC, CCodingContext *pContext,
     }
 
     if(pSC->WMISCP.sbSubband != SB_NO_FLEXBITS)
-        writeIS_L1(pSC, pIOFL);
+        writeIS(pSC, pIOFL);
 
     /** set scan arrays **/
     if (pMBInfo->iOrientation == 1) {
@@ -861,10 +861,6 @@ static Int CodeCoeffs (CWMImageStrCodec * pSC, CCodingContext *pContext,
         }
 
         for (iBlock = iIndex = 0; iBlock < iNBlocks; iBlock++) {
-            writeIS_L2(pSC, pIO);
-            if (pIO != pIOFL)
-                writeIS_L2(pSC, pIOFL);
-            
             for (iSubblock = 0; iSubblock < 4; iSubblock++, iPattern >>= 1, iIndex ++) {
                 const PixelI *pCoeffs = NULL;
 
@@ -956,7 +952,7 @@ static Void CodeCBP (CWMImageStrCodec * pSC, CCodingContext *pContext,
     UNREFERENCED_PARAMETER( iMBY );
 
     predCBPEnc(pSC, pContext);
-    writeIS_L1(pSC, pIO);
+    writeIS(pSC, pIO);
 
     iDiffCBPCU = pSC->MBInfo.iDiffCBP[1];
     iDiffCBPCV = pSC->MBInfo.iDiffCBP[2];
