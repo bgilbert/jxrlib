@@ -919,16 +919,7 @@ Int DecodeMacroblockLowpass (CWMImageStrCodec * pSC, CCodingContext *pContext,
                 }
             }
             else {
-#ifdef WIN32
-                const Int iMask = (1 << iModelBits) - 1;
-#endif // WIN32
                 for (k = 1; k < 16; k++) {
-#ifdef WIN32
-                    if (pCoeffs[k]) {
-                        Int r1 = _rotl(pCoeffs[k], iModelBits);
-                        pCoeffs[k] = (r1 ^ getBits(pIO, iModelBits)) - (r1 & iMask);
-                    }
-#else // WIN32
                     if (pCoeffs[k] > 0) {
                         pCoeffs[k] <<= iModelBits;
                         pCoeffs[k] += getBits (pIO, iModelBits);
@@ -937,7 +928,6 @@ Int DecodeMacroblockLowpass (CWMImageStrCodec * pSC, CCodingContext *pContext,
                         pCoeffs[k] = (int) (((unsigned) pCoeffs[k]) << iModelBits);
                         pCoeffs[k] -= getBits (pIO, iModelBits);
                     }
-#endif // WIN32
                     else {
                         //pCoeffs[k] = getBits (pIO, iModelBits);
                         //if (pCoeffs[k] && _getBool16 (pIO))
