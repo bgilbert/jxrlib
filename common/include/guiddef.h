@@ -53,14 +53,6 @@ typedef struct _GUID {
 #endif
 #endif
 
-#ifndef FAR
-#if defined(_WIN32) || defined(__ANSI__)
-#define FAR
-#else
-#define FAR _far
-#endif
-#endif
-
 #ifndef DECLSPEC_SELECTANY
 #if (_MSC_VER >= 1100)
 #define DECLSPEC_SELECTANY  __declspec(selectany)
@@ -87,7 +79,7 @@ typedef struct _GUID {
                 = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
 #else
 #define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
-    EXTERN_C const GUID FAR name
+    EXTERN_C const GUID name
 #endif // INITGUID
 
 #if _MSC_VER < 1900
