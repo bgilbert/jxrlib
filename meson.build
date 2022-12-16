@@ -111,11 +111,25 @@ enc = executable(
   link_with : [jxrglue],
 )
 
+enc420 = executable(
+  'JxrEnc420',
+  'jxrencoderdecoder/JxrEnc420.c',
+  include_directories : jxrglue_include,
+  link_with : [jxrglue],
+)
+
 dec = executable(
   'JxrDecApp',
   'jxrencoderdecoder/JxrDecApp.c',
   include_directories : jxrglue_include,
   install : true,
+  link_with : [jxrglue],
+)
+
+dec420 = executable(
+  'JxrDec420',
+  'jxrencoderdecoder/JxrDec420.c',
+  include_directories : jxrglue_include,
   link_with : [jxrglue],
 )
 
