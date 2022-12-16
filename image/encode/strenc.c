@@ -42,12 +42,6 @@
 extern char L1WW[];
 #endif
 
-#ifdef X86OPT_INLINE
-#define _FORCEINLINE __forceinline
-#else // X86OPT_INLINE
-#define _FORCEINLINE
-#endif // X86OPT_INLINE
-
 Int inputMBRow(CWMImageStrCodec *);
 
 #if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_ENC) || defined(WMP_OPT_TRFM_ENC)
@@ -312,7 +306,7 @@ Int processMacroblock(CWMImageStrCodec *pSC)
 /*************************************************************************
   forwardRGBE: forward conversion from RGBE to RGB
 *************************************************************************/
-static _FORCEINLINE PixelI forwardRGBE (PixelI RGB, PixelI E)
+static PixelI forwardRGBE (PixelI RGB, PixelI E)
 {
     PixelI iResult = 0, iAppend = 1;
 
@@ -347,7 +341,7 @@ static _FORCEINLINE PixelI forwardRGBE (PixelI RGB, PixelI E)
 /*************************************************************************
   convert float-32 into float with (c, lm)!!
 *************************************************************************/
-static _FORCEINLINE PixelI float2pixel (float f, const char _c, const unsigned char _lm)
+static PixelI float2pixel (float f, const char _c, const unsigned char _lm)
 {
     union uif
     {
@@ -397,7 +391,7 @@ static _FORCEINLINE PixelI float2pixel (float f, const char _c, const unsigned c
 /*************************************************************************
   convert Half-16 to internal format, only need to handle sign bit
 *************************************************************************/
-static _FORCEINLINE PixelI forwardHalf (PixelI hHalf)
+static PixelI forwardHalf (PixelI hHalf)
 {
     PixelI s;
     s = hHalf >> 31;

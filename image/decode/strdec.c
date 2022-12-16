@@ -38,12 +38,6 @@
 #include "memtrace.h"
 #endif
 
-#ifdef X86OPT_INLINE
-#define _FORCEINLINE __forceinline
-#else // X86OPT_INLINE
-#define _FORCEINLINE
-#endif // X86OPT_INLINE
-
 #if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_DEC) || defined(WMP_OPT_TRFM_DEC)
 void StrDecOpt(CWMImageStrCodec* pSC);
 #endif // OPT defined
@@ -412,7 +406,7 @@ Int processMacroblockDec(CWMImageStrCodec * pSC)
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
 //inverseConvert: Inverse conversion from float RGB to RGBE
-static _FORCEINLINE void inverseConvert (PixelI iF, U8 *pRGB, U8 *pE)
+static void inverseConvert (PixelI iF, U8 *pRGB, U8 *pE)
 {
     if (iF <= 0) {
         *pRGB = *pE = 0;
@@ -433,7 +427,7 @@ static _FORCEINLINE void inverseConvert (PixelI iF, U8 *pRGB, U8 *pE)
 #define max(a,b) ((a) > (b) ? (a) : (b))
 #endif // __ANSI__
 
-static _FORCEINLINE void inverseConvertRGBE (PixelI iFr, PixelI iFg, PixelI iFb, U8 *pR, U8 *pG, U8 *pB, U8 *pE)
+static void inverseConvertRGBE (PixelI iFr, PixelI iFg, PixelI iFb, U8 *pR, U8 *pG, U8 *pB, U8 *pE)
 {
     U8 iShift;
 
@@ -461,7 +455,7 @@ static _FORCEINLINE void inverseConvertRGBE (PixelI iFr, PixelI iFg, PixelI iFb,
 
 
 //pixel to float 32!
-static _FORCEINLINE float pixel2float(PixelI _h, const char _c, const unsigned char _lm)
+static float pixel2float(PixelI _h, const char _c, const unsigned char _lm)
 {
     union uif
     {
@@ -501,7 +495,7 @@ static _FORCEINLINE float pixel2float(PixelI _h, const char _c, const unsigned c
 }
 
 //convert Half-16 to internal format, only need to handle sign bit
-static _FORCEINLINE U16 backwardHalf (PixelI hHalf)
+static U16 backwardHalf (PixelI hHalf)
 {
     PixelI s;
     s = hHalf >> 31;

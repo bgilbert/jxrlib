@@ -49,8 +49,6 @@
 #define WMP_OPT_CC_DEC
 #define WMP_OPT_TRFM_DEC
 
-#define X86OPT_INLINE
-
 #endif
 #endif // ENABLE_OPTIMIZATIONS
 

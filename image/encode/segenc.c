@@ -39,9 +39,6 @@
 #endif
 
 /** local function definitions **/
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Int EncodeBlock (Bool bChroma, const Int *aLocalCoef, Int iNumNonzero,
                          struct CAdaptiveHuffman **pAHexpt,
                          Int iContextOffset, BitIOInfo* pOut, UInt iLocation);
@@ -49,9 +46,6 @@ static Int EncodeBlock (Bool bChroma, const Int *aLocalCoef, Int iNumNonzero,
 /*************************************************************************
     EncodeSignificantAbsLevel
 *************************************************************************/
-#ifdef X86OPT_INLINE
-//__forceinline
-#endif
 static Void EncodeSignificantAbsLevel (UInt iAbsLevel, struct CAdaptiveHuffman *pAHexpt, BitIOInfo* pOut)
 {
     Int iIndex, iFixed, aIndex[] = { 0,1,2,2, 3,3,3,3, 4,4,4,4, 5,5,5,5 };
@@ -243,9 +237,6 @@ Int EncodeMacroblockDC (CWMImageStrCodec *pSC, CCodingContext *pContext, Int iMB
 /*************************************************************************
     Scan block with zero model bits
 *************************************************************************/
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Int AdaptiveScanZero (const PixelI *pCoeffs, CAdaptiveScan *pScan,
                              Int *pRLCoeffs, const Int iCount)
 {
@@ -281,9 +272,6 @@ static Int AdaptiveScanZero (const PixelI *pCoeffs, CAdaptiveScan *pScan,
 /*************************************************************************
     Scan block with nonzero model bits, all trimmed
 *************************************************************************/
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Int AdaptiveScanTrim (const PixelI *pCoeffs, CAdaptiveScan *pScan,
                              const Int iModelBits, Int *pRLCoeffs, const Int iCount)
 {
@@ -337,9 +325,6 @@ static const Int gRes[] = {
 52*2+1, 54*2+1, 56*2+1, 58*2+1, 60*2+1, 62*2+1, 64*2+1 };
 #endif // USE_GRES_LUT
 
-#ifdef X86OPT_INLINE
-//__forceinline
-#endif
 static Int AdaptiveScan (const PixelI *pCoeffs, Int *pResidual,
                          CAdaptiveScan *pScan,
                          const Int iModelBits, const Int iTrimBits,
@@ -689,9 +674,6 @@ Void AdaptHighpassEnc(CCodingContext *pSC)
         pAHexpt[5-6] == <lev | continuous> first symbol
         pAHexpt[7-8] == <lev | continuous> condition on SRn no use
 *************************************************************************/
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Void EncodeSignificantRun (Int iRun, Int iMaxRun, struct CAdaptiveHuffman *pAHexpt, BitIOInfo* pOut)
 {
     Int iIndex, iFLC, iBin;
@@ -731,9 +713,6 @@ static Void EncodeSignificantRun (Int iRun, Int iMaxRun, struct CAdaptiveHuffman
     putBit16(pOut, iRun + 1, iFLC);
 }
 
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Void EncodeFirstIndex (Bool bChroma, Int iLoc, Int iCont, Int iIndex, Int iSign,
                   struct CAdaptiveHuffman **ppAHexpt, BitIOInfo* pOut)
 {
@@ -747,9 +726,6 @@ static Void EncodeFirstIndex (Bool bChroma, Int iLoc, Int iCont, Int iIndex, Int
     return;
 }
 
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Void EncodeIndex (Bool bChroma, Int iLoc, Int iCont, Int iIndex, Int  iSign,
                          struct CAdaptiveHuffman **ppAHexpt, BitIOInfo* pOut)
 {
@@ -773,9 +749,6 @@ static Void EncodeIndex (Bool bChroma, Int iLoc, Int iCont, Int iIndex, Int  iSi
     }
 }
 
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Int EncodeBlock (Bool bChroma, const Int *aLocalCoef, Int iNumNonzero,
                          struct CAdaptiveHuffman **pAHexpt, Int iContextOffset,
                          BitIOInfo* pOut, UInt iLocation)
@@ -837,9 +810,6 @@ static Int EncodeBlock (Bool bChroma, const Int *aLocalCoef, Int iNumNonzero,
 /*************************************************************************
     CodeCoeffs
 *************************************************************************/
-#ifdef X86OPT_INLINE
-__forceinline
-#endif
 static Int CodeCoeffs (CWMImageStrCodec * pSC, CCodingContext *pContext,
                         Int iMBX, Int iMBY, BitIOInfo* pIO, BitIOInfo* pIOFL)
 {
