@@ -38,21 +38,6 @@
 #endif
 
 //================================================================
-#ifdef ENABLE_OPTIMIZATIONS
-#if defined(_MSC_VER) && !defined(_WIN64)
-#define WMP_OPT_SSE2
-
-#define WMP_OPT_CC_ENC
-//#define WMP_OPT_TRFM_ENC
-//#define WMP_OPT_QT
-
-#define WMP_OPT_CC_DEC
-#define WMP_OPT_TRFM_DEC
-
-#endif
-#endif // ENABLE_OPTIMIZATIONS
-
-//================================================================
 //#ifdef WIN32
 #if defined(_MSC_VER) && !defined(UNDER_CE)   // WIN32 seems to be defined always in VS2005 for ARM platform
 #define PLATFORM_X86
@@ -212,10 +197,6 @@ typedef struct tagCWMIQuantizer {
     I32 iOffset;
     I32 iMan;
     I32 iExp;
-#if defined(WMP_OPT_QT)
-    float f1_QP;
-    double d1_QP;
-#endif    
 } CWMIQuantizer;
 
 /* temporary bridge between old APIs and streaming APIs */

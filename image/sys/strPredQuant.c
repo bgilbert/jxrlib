@@ -97,10 +97,6 @@ Void remapQP(CWMIQuantizer * pQP, I32 iShift, Bool bScaledArith)
         pQP->iMan = gs_QPRecipTable[man].iMan;
         pQP->iExp = gs_QPRecipTable[man].iExp + exp;
         pQP->iOffset = ((pQP->iQP * 3 + 1) >> 3);
-#if defined(WMP_OPT_QT)
-        pQP->f1_QP = 1.0f / pQP->iQP;
-        pQP->d1_QP = 1.0 / pQP->iQP;
-#endif    
     }
     else {
         I32 man = 0, exp = 0;
@@ -114,10 +110,6 @@ Void remapQP(CWMIQuantizer * pQP, I32 iShift, Bool bScaledArith)
         pQP->iMan = gs_QPRecipTable[man].iMan;
         pQP->iExp = gs_QPRecipTable[man].iExp + exp;
         pQP->iOffset = ((pQP->iQP * 3 + 1) >> 3);
-#if defined(WMP_OPT_QT)
-        pQP->f1_QP = 1.0f / pQP->iQP;
-        pQP->d1_QP = 1.0 / pQP->iQP;
-#endif    
     }
 }
 

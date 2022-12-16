@@ -44,10 +44,6 @@ extern char L1WW[];
 
 Int inputMBRow(CWMImageStrCodec *);
 
-#if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_ENC) || defined(WMP_OPT_TRFM_ENC)
-void StrEncOpt(CWMImageStrCodec* pSC);
-#endif // OPT defined
-
 #define MINIMUM_PACKET_LENGTH 4  // as long as packet header - skipped if data is not accessed (happens only for flexbits)
 
 Void writeQuantizer(CWMIQuantizer * pQuantizer[MAX_CHANNELS], BitIOInfo * pIO, U8 cChMode, size_t cChannel, size_t iPos)
@@ -1478,9 +1474,6 @@ Int ImageStrEncInit(
     *pctxSC = (CTXSTRCODEC)pSC;
 
     writeIndexTableNull(pSC);
-#if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_ENC) || defined(WMP_OPT_TRFM_ENC)
-    StrEncOpt(pSC);
-#endif // OPT defined
 
     PERFTIMER_STOP(pSC->m_fMeasurePerf, pSC->m_ptEncDecPerf);
     return ICERR_OK;

@@ -38,10 +38,6 @@
 #include "memtrace.h"
 #endif
 
-#if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_DEC) || defined(WMP_OPT_TRFM_DEC)
-void StrDecOpt(CWMImageStrCodec* pSC);
-#endif // OPT defined
-
 Int processMacroblockDec(CWMImageStrCodec *);
 
 U8 readQuantizerSB(U8 pQPIndex[MAX_CHANNELS], SimpleBitIO * pIO, size_t cChannel)
@@ -3442,13 +3438,6 @@ Int ImageStrDecDecode(
         setROI(pNextSC);
     }
 #endif // REENTRANT_MODE
-
-// optimization flags can be defined only after ROI is set!
-#if defined(WMP_OPT_SSE2) || defined(WMP_OPT_CC_DEC) || defined(WMP_OPT_TRFM_DEC)
-    StrDecOpt(pSC);
-#endif // OPT defined
-
-
 
     cMBRow = (pSC->m_Dparam->bDecodeFullFrame ? pSC->cmbHeight : ((pSC->m_Dparam->cROIBottomY + 16) >> 4));
 
