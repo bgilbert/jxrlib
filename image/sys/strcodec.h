@@ -33,11 +33,6 @@
 #include "windowsmediaphoto.h"
 #include "common.h"
 
-// added for Xcode PK universal binary
-#ifdef __ppc__
-#define _BIG__ENDIAN_
-#endif
-
 //================================================================
 
 //================================
