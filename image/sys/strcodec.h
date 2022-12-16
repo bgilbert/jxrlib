@@ -81,9 +81,6 @@ static inline U32 _byteswap_ulong(U32 bits)
 // test for more than 1 packet data
 #define PACKET1(ps, pc, s) (((intptr_t)(ps) ^ (intptr_t)(pc)) & ((uintptr_t)(s)))
 
-// alternate pointer p between 2 values aligned to s, s=pow(2,n)
-//#define ALTPTR(p, s) ((void*)((uintptr_t)(p) ^ (s)))
-
 // align point, s=pow(2,n), p aligns to s
 #define ALIGNUP(p, s) ((void*)(((uintptr_t)(p) + ((uintptr_t)(s) - 1)) & ~((uintptr_t)(s) - 1)))
 #define ALIGNDOWN(p, s) ((void*)((uintptr_t)(p) & ~((uintptr_t)(s) - 1)))
