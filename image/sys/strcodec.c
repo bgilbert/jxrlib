@@ -1028,12 +1028,12 @@ U32 putBit16_S(CWMImageStrCodec* pSC, BitIOInfo* pIO, U32 uiBits, U32 cBits)
 //----------------------------------------------------------------
 U32 getSizeRead(BitIOInfo* pIO)
 {
-    return (U32)(UINTPTR_T)(pIO->pbStart + PACKETLENGTH * 2 - pIO->pbCurrent) - pIO->cBitsUsed / 8;
+    return (U32)(uintptr_t)(pIO->pbStart + PACKETLENGTH * 2 - pIO->pbCurrent) - pIO->cBitsUsed / 8;
 }
 
 U32 getSizeWrite(BitIOInfo* pIO)
 {
-    return (U32)(UINTPTR_T)(pIO->pbCurrent + (pIO->pbStart <= pIO->pbCurrent ? 0 : PACKETLENGTH * 2) - pIO->pbStart) + pIO->cBitsUsed / 8;
+    return (U32)(uintptr_t)(pIO->pbCurrent + (pIO->pbStart <= pIO->pbCurrent ? 0 : PACKETLENGTH * 2) - pIO->pbStart) + pIO->cBitsUsed / 8;
 }
 
 //----------------------------------------------------------------

@@ -44,8 +44,6 @@
 
 #define PACKETLENGTH (1U<<12)   // 4kB
 
-#define UINTPTR_T uintptr_t
-#define INTPTR_T intptr_t
 typedef uint64_t U64;
 
 //================================================================
@@ -74,26 +72,21 @@ static inline U32 _byteswap_ulong(U32 bits)
 //================================================================
 #define MARKERCOUNT (PACKETLENGTH * 2)
 
-// The following macros depend on UINTPTR_T and INTPTR_T being properly defined
-// so that they are equal to pointer width. Confirm and fail if our assumptions are wrong.
-CT_ASSERT(sizeof(UINTPTR_T) == sizeof(void*), strcodec1);
-CT_ASSERT(sizeof(INTPTR_T) == sizeof(void*), strcodec2);
-
 // wrap around pointer, s=pow(2,n), p wraps aligned to s
-#define WRAPPTR(p, s) ((void*)((UINTPTR_T)(p) & ~(UINTPTR_T)(s)))
+#define WRAPPTR(p, s) ((void*)((uintptr_t)(p) & ~(uintptr_t)(s)))
 
 // mask certain bit inside a pointer, simulate wrap around
-#define MASKPTR(p, m) ((void*)((UINTPTR_T)(p) & (INTPTR_T)(m)))
+#define MASKPTR(p, m) ((void*)((uintptr_t)(p) & (intptr_t)(m)))
 
 // test for more than 1 packet data
-#define PACKET1(ps, pc, s) (((INTPTR_T)(ps) ^ (INTPTR_T)(pc)) & ((UINTPTR_T)(s)))
+#define PACKET1(ps, pc, s) (((intptr_t)(ps) ^ (intptr_t)(pc)) & ((uintptr_t)(s)))
 
 // alternate pointer p between 2 values aligned to s, s=pow(2,n)
 //#define ALTPTR(p, s) ((void*)((uintptr_t)(p) ^ (s)))
 
 // align point, s=pow(2,n), p aligns to s
-#define ALIGNUP(p, s) ((void*)(((UINTPTR_T)(p) + ((UINTPTR_T)(s) - 1)) & ~((UINTPTR_T)(s) - 1)))
-#define ALIGNDOWN(p, s) ((void*)((UINTPTR_T)(p) & ~((UINTPTR_T)(s) - 1)))
+#define ALIGNUP(p, s) ((void*)(((uintptr_t)(p) + ((uintptr_t)(s) - 1)) & ~((uintptr_t)(s) - 1)))
+#define ALIGNDOWN(p, s) ((void*)((uintptr_t)(p) & ~((uintptr_t)(s) - 1)))
 
 //================================================================
 // timer support
