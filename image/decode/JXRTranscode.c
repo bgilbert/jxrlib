@@ -57,8 +57,8 @@ EXTERN_C Int WriteImagePlaneHeader(CWMImageStrCodec *);
 EXTERN_C Int writeIndexTable(CWMImageStrCodec *);
 EXTERN_C Int copyTo(struct WMPStream *, struct WMPStream *, size_t);
 
-const static Bool bFlipV[O_MAX] = {FALSE, TRUE , FALSE, TRUE, TRUE , TRUE, FALSE, FALSE};
-const static Bool bFlipH[O_MAX] = {FALSE, FALSE, TRUE , TRUE, FALSE, TRUE, FALSE, TRUE};
+static const Bool bFlipV[O_MAX] = {FALSE, TRUE , FALSE, TRUE, TRUE , TRUE, FALSE, FALSE};
+static const Bool bFlipH[O_MAX] = {FALSE, FALSE, TRUE , TRUE, FALSE, TRUE, FALSE, TRUE};
 
 typedef struct CTileQPInfo
 {

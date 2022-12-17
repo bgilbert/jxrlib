@@ -187,7 +187,7 @@ ERR WriteTifHeader(
     };
     // const U32 cbTifDEMisc = sizeof(U16) * 10 + sizeof(U32) * 2 * 2;
 
-    const static TifDE tifDEs[] =
+    static const TifDE tifDEs[] =
     {
         {0x100, 4,  1, (U32) -1}, // TIF_tagImageWidth
         {0x101, 4,  1, (U32) -1}, // TIF_tagImageLength

@@ -582,8 +582,8 @@ typedef struct PacketInfo
 /********************************************************************/
 
 /********************************************************************/
-const static Int blkIdxByRow[4][4] = {{0, 1, 4, 5}, {2, 3, 6, 7}, {8, 9, 12, 13}, {10, 11, 14, 15}};
-const static Int blkIdxByColumn[4][4] = {{0, 2, 8, 10}, {1, 3, 9, 11},{4, 6, 12, 14},{5, 7, 13, 15}};
+static const Int blkIdxByRow[4][4] = {{0, 1, 4, 5}, {2, 3, 6, 7}, {8, 9, 12, 13}, {10, 11, 14, 15}};
+static const Int blkIdxByColumn[4][4] = {{0, 2, 8, 10}, {1, 3, 9, 11},{4, 6, 12, 14},{5, 7, 13, 15}};
 
 Int getACPredMode(CWMIMBInfo *, COLORFORMAT);
 Int getDCACPredMode(CWMImageStrCodec *, size_t);
