@@ -198,7 +198,7 @@ ERR PKTestFactory_CreateDecoderFromFile(const char* szFilename, PKImageDecode** 
     ERR err = WMP_errSuccess;
 
     char *pExt = NULL;
-    PKIID* pIID = NULL;
+    const PKIID* pIID = NULL;
 
     struct WMPStream* pStream = NULL;
     PKImageDecode* pDecoder = NULL;
