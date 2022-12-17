@@ -721,59 +721,6 @@ Void outputNChannel(CWMImageStrCodec * pSC, size_t iFirstRow, size_t iFirstColum
     }
 }
 
-static void fixup_Y_ONLY_to_Others(
-    const CWMImageStrCodec* pSC,
-    const CWMImageBufferInfo* pBI)
-{
-    const CWMImageInfo* pII = &pSC->WMII;
-    const CWMIStrCodecParam* pSCP = &pSC->WMISCP;
-    size_t cWidth = 0, cHeight = 0;
-    size_t idxY = 0, idxX = 0;
-
-    if (CF_RGB != pII->cfColorFormat || Y_ONLY != pSCP->cfColorFormat)
-        return;
-
-    cWidth = 0 != pII->cROIWidth ? pII->cROIWidth : pII->cWidth;
-    cHeight = 0 != pII->cROIHeight ? pII->cROIHeight : pII->cHeight;
-
-#define fixup(type, nCh) \
-for (idxY = 0; idxY < cHeight; ++idxY) \
-{ \
-    type * pT = (type *)((U8*)pBI->pv + pBI->cbStride * idxY); \
-    for (idxX = 0; idxX < cWidth; ++idxX) \
-    { \
-        pT[2] = pT[1] = pT[0]; \
-        pT += nCh; \
-    } \
-} \
-break
-
-    switch (pII->bdBitDepth)
-    {
-        case BD_8:
-            fixup(U8, (pII->cBitsPerUnit >> 3));
-            break;
-
-        case BD_16:
-        case BD_16S:
-        case BD_16F:
-            fixup(U16, (pII->cBitsPerUnit >> 3) / sizeof(U16));
-            break;
-
-        case BD_32:
-        case BD_32S:
-        case BD_32F:
-            fixup(U32, (pII->cBitsPerUnit >> 3) / sizeof(float));
-            break;
-
-        case BD_5:
-        case BD_10:
-        case BD_565:
-        default:
-            break;
-    }
-}
-
 // centralized alpha channel color conversion, small perf penalty
 Int outputMBRowAlpha(CWMImageStrCodec * pSC)
 {
@@ -3221,7 +3168,6 @@ Int ImageStrDecInit(
     CWMImageStrCodec *pSC = NULL, *pNextSC = NULL;
     char* pb = NULL;
     size_t cb = 0, i;
-    Bool bLossyTranscoding = FALSE;
     Bool bUseHardTileBoundaries = FALSE; //default is soft tile boundaries
     Bool bLessThan64Bit = sizeof(void *) < 8;
 
@@ -3240,8 +3186,6 @@ Int ImageStrDecInit(
     }
 
     bUseHardTileBoundaries = SC.WMISCP.bUseHardTileBoundaries;
-    if(SC.WMII.cfColorFormat == CMYK && pII->cfColorFormat == CF_RGB)
-        bLossyTranscoding = TRUE;
     if(pSCP->cfColorFormat != CMYK && (pII->cfColorFormat == CMYK))
         return ICERR_ERROR;
 

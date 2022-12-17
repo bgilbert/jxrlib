@@ -37,7 +37,6 @@
 static Void fwdOddOdd(PixelI *, PixelI *, PixelI *, PixelI *);
 static Void fwdOddOddPre(PixelI *, PixelI *, PixelI *, PixelI *);
 static Void fwdOdd(PixelI *, PixelI *, PixelI *, PixelI *);
-static Void strDCT2x2alt(PixelI * a, PixelI * b, PixelI * c, PixelI * d);
 static Void strHSTenc1(PixelI *, PixelI *);
 static Void strHSTenc(PixelI *, PixelI *, PixelI *, PixelI *);
 static Void strHSTenc1_edge (PixelI *pa, PixelI *pd);

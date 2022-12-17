@@ -63,17 +63,6 @@ static Void CleanAH(CAdaptiveHuffman **ppAdHuff)
     }
 }
 
-static Void CleanAHDec(CCodingContext * pSC)
-{
-    Int kk;
-
-    for (kk = 0; kk < NUMVLCTABLES; kk++) {
-        CleanAH(&(pSC->m_pAHexpt[kk]));
-    }
-    CleanAH(&(pSC->m_pAdaptHuffCBPCY));
-    CleanAH(&(pSC->m_pAdaptHuffCBPCY1));
-}
-
 /*************************************************************************
     Initialize an adaptive huffman table
 *************************************************************************/
