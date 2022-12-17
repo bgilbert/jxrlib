@@ -639,6 +639,5 @@ void flushToByte(BitIOInfo* pIO);
     pIO->cBitsUsed &= 16 - 1;\
     pIO->uiAccumulator = LOAD16(pIO->pbCurrent) << pIO->cBitsUsed;\
     return 0;
-//    pIO->uiAccumulator = LOAD16(pIO->pbCurrent) & ((U32)(-1) >> pIO->cBitsUsed);\
 
 void OutputPerfTimerReport(CWMImageStrCodec *pState);

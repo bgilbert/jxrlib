@@ -42,20 +42,6 @@ static Void strHSTenc1(PixelI *, PixelI *);
 static Void strHSTenc(PixelI *, PixelI *, PixelI *, PixelI *);
 static Void strHSTenc1_edge (PixelI *pa, PixelI *pd);
 
-//static Void scaleDownUp0(PixelI *, PixelI *);
-//static Void scaleDownUp1(PixelI *, PixelI *);
-//static Void scaleDownUp2(PixelI *, PixelI *);
-//#define FOURBUTTERFLY_ENC_ALT(p, i00, i01, i02, i03, i10, i11, i12, i13,	\
-//    i20, i21, i22, i23, i30, i31, i32, i33)		\
-//    strHSTenc(&p[i00], &p[i01], &p[i02], &p[i03]);			\
-//    strHSTenc(&p[i10], &p[i11], &p[i12], &p[i13]);			\
-//    strHSTenc(&p[i20], &p[i21], &p[i22], &p[i23]);			\
-//    strHSTenc(&p[i30], &p[i31], &p[i32], &p[i33]);          \
-//    strHSTenc1(&p[i00], &p[i03]);			\
-//    strHSTenc1(&p[i10], &p[i13]);			\
-//    strHSTenc1(&p[i20], &p[i23]);			\
-//    strHSTenc1(&p[i30], &p[i33])
-
 /** DCT stuff **/
 /** data order before DCT **/
 /**  0  1  2  3 **/
