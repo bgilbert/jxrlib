@@ -30,11 +30,6 @@ endif
 
 install_headers(
   'common/include/guiddef.h',
-  'common/include/wmsal.h',
-  'common/include/wmspecstring.h',
-  'common/include/wmspecstrings_adt.h',
-  'common/include/wmspecstrings_strict.h',
-  'common/include/wmspecstrings_undef.h',
   'image/sys/windowsmediaphoto.h',
   'jxrgluelib/JXRGlue.h',
   'jxrgluelib/JXRMeta.h',
