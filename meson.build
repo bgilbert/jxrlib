@@ -3,7 +3,6 @@ project(
   'c',
   default_options : [
     'buildtype=debugoptimized',
-    'warning_level=0',
   ],
   license : 'BSD-2-Clause',
   meson_version : '>=0.50',
