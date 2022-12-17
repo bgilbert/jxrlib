@@ -285,7 +285,8 @@ ERR PKTestDecode_Release(
 {
     PKTestDecode* pID = *ppID;
 
-    pID->fStreamOwner && pID->pStream->Close(&pID->pStream);
+    if (pID->fStreamOwner)
+        pID->pStream->Close(&pID->pStream);
 
     return PKFree((void **) ppID);
 }

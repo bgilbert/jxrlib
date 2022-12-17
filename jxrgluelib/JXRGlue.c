@@ -899,7 +899,8 @@ ERR PKImageDecode_Release(
 {
     PKImageDecode* pID = *ppID;
 
-    pID->fStreamOwner && pID->pStream->Close(&pID->pStream);
+    if (pID->fStreamOwner)
+        pID->pStream->Close(&pID->pStream);
 
     return PKFree((void **) ppID);
 }
