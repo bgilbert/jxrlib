@@ -108,7 +108,7 @@ main(int argc, char* argv[])
 
     const char *size = argv[2];
     const char *x = strchr(size, 'x');
-    if (!x && x != size && x != (x + strlen(x) - 1)) {
+    if (!x || x == size || x == (size + strlen(size) - 1)) {
         fprintf(stderr, "Invalid image size input!\n");
         return 1;
     }
