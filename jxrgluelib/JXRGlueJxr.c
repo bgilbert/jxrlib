@@ -276,6 +276,15 @@ Cleanup:
 //================================================================
 // PKImageEncode_WMP
 //================================================================
+static U32 Pack_Float_In_U32(float f)
+{
+    union {
+        U32 u;
+        float f;
+    } un = {.f = f};
+    return un.u;
+}
+
 ERR WriteContainerPre(
     PKImageEncode* pIE)
 {
@@ -631,12 +640,12 @@ ERR WriteContainerPre(
     
     wmpDE = wmpDEs[i++];
     assert(WMP_tagWidthResolution == wmpDE.uTag);
-    *((float *) &wmpDE.uValueOrOffset) = pIE->fResX;
+    wmpDE.uValueOrOffset = Pack_Float_In_U32(pIE->fResX);
     Call(WriteWmpDE(pWS, &offPos, &wmpDE, NULL, NULL));
 
     wmpDE = wmpDEs[i++];
     assert(WMP_tagHeightResolution == wmpDE.uTag);
-    *((float *) &wmpDE.uValueOrOffset) = pIE->fResY;
+    wmpDE.uValueOrOffset = Pack_Float_In_U32(pIE->fResY);
     Call(WriteWmpDE(pWS, &offPos, &wmpDE, NULL, NULL));
    
     wmpDE = wmpDEs[i++];

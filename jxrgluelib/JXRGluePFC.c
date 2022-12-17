@@ -68,7 +68,11 @@ static U32 Convert_Half_To_Float(U16 u16)
 static U16 Convert_Float_To_Half(float f)
 {
     // 1s5e10m -> 1s8e23m
-    const U32 iFloat = *(U32*)&f; // Convert float to U32
+    union {
+        U32 u;
+        float f;
+    } un = {.f = f};
+    const U32 iFloat = un.u; // Convert float to U32
 
     if (f != f)
     {
@@ -117,6 +121,15 @@ static U8 Convert_Float_To_U8(float f)
     {
         return 255;
     }
+}
+
+static float Unpack_Float_From_U32(U32 u)
+{
+    union {
+        U32 u;
+        float f;
+    } un = {.u = u};
+    return un.f;
 }
 
 static U8 Convert_AlphaFloat_To_U8(float f)
@@ -1897,7 +1910,7 @@ ERR Gray16Half_Gray8(PKFormatConverter* pFC, const PKRect* pRect, U8* pb, U32 cb
         {
             const U32 v = Convert_Half_To_Float(piSrcPixel[x]);
                 
-            piDstPixel[x] = Convert_Float_To_U8(*(float*)&v);
+            piDstPixel[x] = Convert_Float_To_U8(Unpack_Float_From_U32(v));
         }
     }
 
@@ -1924,9 +1937,9 @@ ERR RGB48Half_RGB24(PKFormatConverter* pFC, const PKRect* pRect, U8* pb, U32 cbS
             const U32 g = Convert_Half_To_Float(piSrcPixel[3*x+1]);
             const U32 b = Convert_Half_To_Float(piSrcPixel[3*x+2]);
         
-            pfltDstPixel[3*x] = Convert_Float_To_U8(*(float*)&r);
-            pfltDstPixel[3*x+1] = Convert_Float_To_U8(*(float*)&g);
-            pfltDstPixel[3*x+2] = Convert_Float_To_U8(*(float*)&b);
+            pfltDstPixel[3*x] = Convert_Float_To_U8(Unpack_Float_From_U32(r));
+            pfltDstPixel[3*x+1] = Convert_Float_To_U8(Unpack_Float_From_U32(g));
+            pfltDstPixel[3*x+2] = Convert_Float_To_U8(Unpack_Float_From_U32(b));
         }
     }
     
@@ -1953,9 +1966,9 @@ ERR RGB64Half_RGB24(PKFormatConverter* pFC, const PKRect* pRect, U8* pb, U32 cbS
             const U32 g = Convert_Half_To_Float(piSrcPixel[4*x+1]);
             const U32 b = Convert_Half_To_Float(piSrcPixel[4*x+2]);
         
-            pfltDstPixel[3*x] = Convert_Float_To_U8(*(float*)&r);
-            pfltDstPixel[3*x+1] = Convert_Float_To_U8(*(float*)&g);
-            pfltDstPixel[3*x+2] = Convert_Float_To_U8(*(float*)&b);
+            pfltDstPixel[3*x] = Convert_Float_To_U8(Unpack_Float_From_U32(r));
+            pfltDstPixel[3*x+1] = Convert_Float_To_U8(Unpack_Float_From_U32(g));
+            pfltDstPixel[3*x+2] = Convert_Float_To_U8(Unpack_Float_From_U32(b));
         }
     }
     
@@ -1983,10 +1996,10 @@ ERR RGBA64Half_RGBA32(PKFormatConverter* pFC, const PKRect* pRect, U8* pb, U32 c
             const U32 b = Convert_Half_To_Float(piSrcPixel[4*x+2]);
             const U32 a = Convert_Half_To_Float(piSrcPixel[4*x+3]);
         
-            pfltDstPixel[4*x] = Convert_Float_To_U8(*(float*)&r);
-            pfltDstPixel[4*x+1] = Convert_Float_To_U8(*(float*)&g);
-            pfltDstPixel[4*x+2] = Convert_Float_To_U8(*(float*)&b);
-            pfltDstPixel[4*x+3] = Convert_AlphaFloat_To_U8(*(float*)&a);
+            pfltDstPixel[4*x] = Convert_Float_To_U8(Unpack_Float_From_U32(r));
+            pfltDstPixel[4*x+1] = Convert_Float_To_U8(Unpack_Float_From_U32(g));
+            pfltDstPixel[4*x+2] = Convert_Float_To_U8(Unpack_Float_From_U32(b));
+            pfltDstPixel[4*x+3] = Convert_AlphaFloat_To_U8(Unpack_Float_From_U32(a));
         }
     }
     
