@@ -18,6 +18,7 @@ m_dep = cc.find_library('m', required : false)
 # compiler options
 add_project_arguments(
   '-DDISABLE_PERF_MEASUREMENT',
+  '-fwrapv',
   language: 'c',
 )
 if host_machine.endian() == 'big'
