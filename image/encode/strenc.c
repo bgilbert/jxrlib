@@ -947,7 +947,7 @@ Int StrEncInit(CWMImageStrCodec* pSC)
 
         /** lossless or Y component lossless condition: all subbands present, uniform quantization with QPIndex 1 **/
         pSC->m_param.bScaledArith = !((pSC->m_param.uQPMode & 7) == 0 && 
-									  1 == pSC->WMISCP.uiDefaultQPIndex <= 1 && 
+									  pSC->WMISCP.uiDefaultQPIndex <= 1 &&
 									  pSC->WMISCP.sbSubband == SB_ALL && 
 									  pSC->m_bUVResolutionChange == FALSE) &&
                                      !pSC->WMISCP.bUnscaledArith;
